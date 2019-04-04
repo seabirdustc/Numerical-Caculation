@@ -27,33 +27,40 @@ def compound_trapezoid(a, b, n):
 
 def main():
     I = -np.cos(6) + np.cos(1)  # 精准值
-    # print("I:", I)
     print("复化梯形积分 误差和误差阶为")
+    elist1 = []
     for k in range(0, 13):
-        print("k={} ,".format(k), end=' ')
+        # print("k={} ,".format(k), end=' ')
+        print("|%d" % k, end='')
         N = 2 ** k
         T = compound_trapezoid(1, 6, N)
-        print("e%d=" % k, end='')
-        print("%.12e" % (I - T), end=' ')
+        # print("e%d=" % k, end='')
+        # print("%.12e" % (I - T), end=' ')
+        print("|%.12e|" % (I - T), end=' ')
+        elist1.append(I - T)
         if k == 0:
-            e = np.fabs(I - T)
             print('')
         if k != 0:
-            print("d%d=" % k, end='')
-            print("%.4f" % (-(np.log(np.fabs((I - T)) / e) / np.log(N))))
+            # print("d%d=" % k, end='')
+            # print("%.12e" % (-(np.log(np.fabs(elist1[k] / elist1[k - 1])) / np.log(2))))
+            print("%.12e|" % (-(np.log(np.fabs(elist1[k ] / elist1[k - 1])) / np.log(2))))
     print("复化Simpson积分 误差和误差阶为")
-    for k in range(0, 13):
-        print("k={} ,".format(k), end=' ')
+    elist2 = []
+    for k in range(1, 13):
+        # print("k={} ,".format(k), end=' ')
+        print("|%d" % k, end='')
         N = 2 ** k
         T = compound_simpson(1, 6, N)
-        print("e%d=" % k, end='')
-        print("%.12e" % (I - T), end=' ')
-        if k == 0:
-            e = np.fabs(I - T)
+        # print("e%d=" % k, end='')
+        # print("%.12e" % (I - T), end=' ')
+        print("|%.12e|" % (I - T), end=' ')
+        elist2.append(I - T)
+        if k == 1:
             print('')
-        if k != 0:
-            print("d%d=" % k, end='')
-            print("%.4f" % (-(np.log(np.fabs((I - T)) / e) / np.log(N))))
+        if k != 1:
+            # print("d%d=" % k, end='')
+            # print("%.12e" % (-(np.log(np.fabs(elist2[k-1] / elist2[k - 2])) / np.log(2))))
+            print("%.12e|" % (-(np.log(np.fabs(elist2[k - 1] / elist2[k - 2])) / np.log(2))))
 
 
 if __name__ == "__main__":
