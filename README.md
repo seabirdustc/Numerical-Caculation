@@ -12,3 +12,6 @@ Program2 Lagrange插值
 Program3 复化积分
 
 Program4 非线性方程求根
+
+Program5 线性方程组迭代法
+
